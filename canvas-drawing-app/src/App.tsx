@@ -39,6 +39,7 @@ type pointType = (number[] | { x: number; y: number; pressure?: number | undefin
 export default function App() {
   const [points, setPoints] = React.useState<pointType>([]);
   const [states, setStates] = React.useState<string[][]>([[]]);
+  const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
   const [undoCounter, setUndoCounter] = React.useState<number>(0);
   const [allPathData, setAllPathData]= React.useState<string[]>([]);
   const [redoPathData, setRedoPathData] = React.useState<string[]>([]);
@@ -49,20 +50,23 @@ export default function App() {
     // console.log("handlePointerDown: ", points);
     setRedoPathData([]);
     // setStates([...states.slice(0, (states.length - 1 - undoCounter))]);
+    setIsDrawing(true);
   }
 
   function handlePointerMove(e) {
-    if (e.buttons !== 1) return; 
+    if (e.buttons !== 1) return;
     setPoints([...points, [e.pageX, e.pageY, e.pressure]]);
     // console.log("handlePointerMove: ", points);
     // if (pathData != "") {
     //   setAllPathData([...allPathData, pathData]);
     // }
+    setIsDrawing(true);
   }
 
   function handlePointerUp(e) {
     setAllPathData([...allPathData, pathData]);
     setStates([...states, allPathData]);
+    setIsDrawing(false);
   }
 
   // function undo() {
@@ -113,7 +117,7 @@ export default function App() {
         style={{ touchAction: "none", position: "absolute", top: "0", left: "0", maxHeight: "90%", maxWidth: "90%", zIndex: "0" }}
       >
         {allPathData.map((pD, index)=>(<path d={pD} key={index}/>))}
-        {points && <path d={pathData} />}
+        {isDrawing && <path d={pathData} />}
       </svg>
       </div>
       <div>
