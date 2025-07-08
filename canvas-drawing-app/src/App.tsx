@@ -38,7 +38,7 @@ type pointType = (number[] | { x: number; y: number; pressure?: number | undefin
 
 export default function App() {
   const [points, setPoints] = React.useState<pointType>([]);
-  const [states, setStates] = React.useState<string[][]>([[]]);
+  const [states, setStates] = React.useState<string[][]>([]);
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
   const [undoCounter, setUndoCounter] = React.useState<number>(0);
   const [allPathData, setAllPathData]= React.useState<string[]>([]);
@@ -93,8 +93,10 @@ export default function App() {
   // }
 
   function undo() {
-    setAllPathData(states[states.length - 1 - (undoCounter + 1)]);
-    setUndoCounter(undoCounter + 1);
+    if (allPathData.length > 0) {
+      setAllPathData(states[states.length - 1 - (undoCounter + 1)]);
+      setUndoCounter(undoCounter + 1);
+    }
   }
 
   function redo() {
@@ -121,7 +123,10 @@ export default function App() {
       </svg>
       </div>
       <div>
-        <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo}>Undo</button>
+        {allPathData.length === 0 ?
+          <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo} disabled>Undo</button> :
+          <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo}>Undo</button>
+        }
         {redoPathData.length === 0 ? 
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} disabled>Redo</button> :
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} onClick={redo}>Redo</button>
