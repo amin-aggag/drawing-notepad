@@ -38,6 +38,8 @@ type pointType = (number[] | { x: number; y: number; pressure?: number | undefin
 
 export default function App() {
   const [points, setPoints] = React.useState<pointType>([]);
+  const [states, setStates] = React.useState<string[][]>([[]]);
+  const [undoCounter, setUndoCounter] = React.useState<number>(0);
   const [allPathData, setAllPathData]= React.useState<string[]>([]);
   const [redoPathData, setRedoPathData] = React.useState<string[]>([]);
 
@@ -46,6 +48,7 @@ export default function App() {
     setPoints([[e.pageX, e.pageY, e.pressure]]);
     // console.log("handlePointerDown: ", points);
     setRedoPathData([]);
+    // setStates([...states.slice(0, (states.length - 1 - undoCounter))]);
   }
 
   function handlePointerMove(e) {
@@ -59,29 +62,40 @@ export default function App() {
 
   function handlePointerUp(e) {
     setAllPathData([...allPathData, pathData]);
+    setStates([...states, allPathData]);
   }
 
+  // function undo() {
+  //   console.log("------- UNDO: ---------");
+  //   const newPathData = allPathData.slice(0, allPathData.length - 2);
+  //   // console.log("newPathData: ", newPathData.length);
+  //   const mostRecentPathData = allPathData[allPathData.length - 1];
+  //   // console.log("mostRecentPathData: ", mostRecentPathData.length);
+  //   setRedoPathData([...redoPathData, allPathData[allPathData.length - 1]]);
+  //   setAllPathData(allPathData.slice(0, allPathData.length - 2));
+  //   console.log("redoPathData: ", redoPathData);
+  // }
+
+  // function redo() {
+  //   console.log("------- REDO: ---------");
+  //   const newRedoPathData = redoPathData.slice(0, redoPathData.length - 2);
+  //   // console.log("newRedoPathData: ", newRedoPathData.length);
+  //   const pathDataToRedo = redoPathData[redoPathData.length - 1];
+  //   // console.log("pathDataToRedo: ", pathDataToRedo.length);
+    
+  //   setAllPathData([...allPathData, redoPathData[redoPathData.length - 1]]);
+  //   setRedoPathData(redoPathData.slice(0, redoPathData.length - 2));
+  //   console.log("redoPathData: ", redoPathData);
+  // }
+
   function undo() {
-    console.log("------- UNDO: ---------");
-    const newPathData = allPathData.slice(0, allPathData.length - 2);
-    // console.log("newPathData: ", newPathData.length);
-    const mostRecentPathData = allPathData[allPathData.length - 1];
-    // console.log("mostRecentPathData: ", mostRecentPathData.length);
-    setRedoPathData([...redoPathData, allPathData[allPathData.length - 1]]);
-    setAllPathData(allPathData.slice(0, allPathData.length - 2));
-    console.log("redoPathData: ", redoPathData);
+    setAllPathData(states[states.length - 1 - (undoCounter + 1)]);
+    setUndoCounter(undoCounter + 1);
   }
 
   function redo() {
-    console.log("------- REDO: ---------");
-    const newRedoPathData = redoPathData.slice(0, redoPathData.length - 2);
-    // console.log("newRedoPathData: ", newRedoPathData.length);
-    const pathDataToRedo = redoPathData[redoPathData.length - 1];
-    // console.log("pathDataToRedo: ", pathDataToRedo.length);
-    
-    setAllPathData([...allPathData, redoPathData[redoPathData.length - 1]]);
-    setRedoPathData(redoPathData.slice(0, redoPathData.length - 2));
-    console.log("redoPathData: ", redoPathData);
+    setAllPathData(states[states.length - 1 + (undoCounter - 1)]);
+    setUndoCounter(undoCounter - 1);
   }
 
   const stroke = getStroke(points, options);
