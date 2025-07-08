@@ -65,7 +65,8 @@ export default function App() {
 
   function handlePointerUp(e) {
     setAllPathData([...allPathData, pathData]);
-    setStates([...states, allPathData]);
+    // Before, I wrote setStates([...states, allPathData]) assuming that allPathData already has the current pathData in its array, but I just remembered this morning (9:35am 9/7/2025) that the states do not update immediately one by one in the order you write them, so I changed it to setStates([...states, [...allPathData, pathData]]) and now the last stroke that was drawn is added to the States array, which means that undoing starts with that stroke instead of the second last stroke (the last stroke though still looks like it's being undoed because the screen rerenders and since the last stroke was not added into the States array, the undo and redo functionality does not include that stroke and so it's pretty much gone. Of course, the last stroke is rendered after you draw it because that is the current pathData, but pathData is immediately changed in the next render after undoing or redoing so it's gone after that.)
+    setStates([...states, [...allPathData, pathData]]);
     setIsDrawing(false);
   }
 
@@ -94,14 +95,22 @@ export default function App() {
 
   function undo() {
     if (allPathData.length > 0) {
+      console.log("isDrawing is now: ", isDrawing);
       setAllPathData(states[states.length - 1 - (undoCounter + 1)]);
       setUndoCounter(undoCounter + 1);
     }
   }
 
   function redo() {
-    setAllPathData(states[states.length - 1 + (undoCounter - 1)]);
-    setUndoCounter(undoCounter - 1);
+    // if (allPathData.length <= states[states.length - 1].length)
+    if (
+      (states.length - 1 - (undoCounter - 1)) > -1 &&
+      (states.length - 1 - (undoCounter - 1)) <= (states.length - 1) 
+    ) {
+      console.log("isDrawing is now: ", isDrawing);
+      setAllPathData(states[states.length - 1 - (undoCounter - 1)]);
+      setUndoCounter(undoCounter - 1);
+    }
   }
 
   const stroke = getStroke(points, options);
@@ -118,16 +127,16 @@ export default function App() {
         onPointerUp={handlePointerUp}
         style={{ touchAction: "none", position: "absolute", top: "0", left: "0", maxHeight: "90%", maxWidth: "90%", zIndex: "0" }}
       >
-        {allPathData.map((pD, index)=>(<path d={pD} key={index}/>))}
+        {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD} key={index}/>))}
         {isDrawing && <path d={pathData} />}
       </svg>
       </div>
       <div>
-        {allPathData.length === 0 ?
+        {(allPathData === undefined || allPathData.length === 0) ?
           <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo} disabled>Undo</button> :
           <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo}>Undo</button>
         }
-        {redoPathData.length === 0 ? 
+        {(allPathData === undefined || states.length === 0) ? 
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} disabled>Redo</button> :
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} onClick={redo}>Redo</button>
         }
