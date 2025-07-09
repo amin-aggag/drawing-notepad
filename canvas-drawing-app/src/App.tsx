@@ -64,9 +64,18 @@ export default function App() {
   }
 
   function handlePointerUp(e) {
-    setAllPathData([...allPathData, pathData]);
-    // Before, I wrote setStates([...states, allPathData]) assuming that allPathData already has the current pathData in its array, but I just remembered this morning (9:35am 9/7/2025) that the states do not update immediately one by one in the order you write them, so I changed it to setStates([...states, [...allPathData, pathData]]) and now the last stroke that was drawn is added to the States array, which means that undoing starts with that stroke instead of the second last stroke (the last stroke though still looks like it's being undoed because the screen rerenders and since the last stroke was not added into the States array, the undo and redo functionality does not include that stroke and so it's pretty much gone. Of course, the last stroke is rendered after you draw it because that is the current pathData, but pathData is immediately changed in the next render after undoing or redoing so it's gone after that.)
-    setStates([...states, [...allPathData, pathData]]);
+    setUndoCounter(0);
+    if (allPathData === undefined) {
+      setAllPathData([pathData]);
+    } else {
+      setAllPathData([...allPathData, pathData]);
+    }
+    if (allPathData === undefined) {
+      setStates([...states, [pathData]]);
+    } else {
+      setStates([...states, [...allPathData, pathData]]);
+    }
+    console.log("states: ", states);
     setIsDrawing(false);
   }
 
@@ -96,7 +105,11 @@ export default function App() {
   function undo() {
     if (allPathData.length > 0) {
       console.log("isDrawing is now: ", isDrawing);
-      setAllPathData(states[states.length - 1 - (undoCounter + 1)]);
+      if (states[states.length - 1 - (undoCounter + 1)] === undefined) {
+        setAllPathData([]);
+      } else {
+        setAllPathData(states[states.length - 1 - (undoCounter + 1)]);
+      }
       setUndoCounter(undoCounter + 1);
     }
   }
@@ -132,11 +145,11 @@ export default function App() {
       </svg>
       </div>
       <div>
-        {(allPathData === undefined || allPathData.length === 0) ?
+        {(allPathData.length === 0 || allPathData.length === 0) ?
           <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo} disabled>Undo</button> :
           <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo}>Undo</button>
         }
-        {(allPathData === undefined || states.length === 0) ? 
+        {(allPathData.length === 0 || states.length === 0) ? 
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} disabled>Redo</button> :
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} onClick={redo}>Redo</button>
         }
