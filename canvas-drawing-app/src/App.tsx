@@ -71,29 +71,6 @@ export default function App() {
     setIsDrawing(false);
   }
 
-  // function undo() {
-  //   console.log("------- UNDO: ---------");
-  //   const newPathData = allPathData.slice(0, allPathData.length - 2);
-  //   // console.log("newPathData: ", newPathData.length);
-  //   const mostRecentPathData = allPathData[allPathData.length - 1];
-  //   // console.log("mostRecentPathData: ", mostRecentPathData.length);
-  //   setRedoPathData([...redoPathData, allPathData[allPathData.length - 1]]);
-  //   setAllPathData(allPathData.slice(0, allPathData.length - 2));
-  //   console.log("redoPathData: ", redoPathData);
-  // }
-
-  // function redo() {
-  //   console.log("------- REDO: ---------");
-  //   const newRedoPathData = redoPathData.slice(0, redoPathData.length - 2);
-  //   // console.log("newRedoPathData: ", newRedoPathData.length);
-  //   const pathDataToRedo = redoPathData[redoPathData.length - 1];
-  //   // console.log("pathDataToRedo: ", pathDataToRedo.length);
-    
-  //   setAllPathData([...allPathData, redoPathData[redoPathData.length - 1]]);
-  //   setRedoPathData(redoPathData.slice(0, redoPathData.length - 2));
-  //   console.log("redoPathData: ", redoPathData);
-  // }
-
   function undo() {
     if (allPathData.length > 0) {
       console.log("isDrawing is now: ", isDrawing);
