@@ -65,16 +65,8 @@ export default function App() {
 
   function handlePointerUp(e) {
     setUndoCounter(0);
-    if (allPathData === undefined) {
-      setAllPathData([pathData]);
-    } else {
-      setAllPathData([...allPathData, pathData]);
-    }
-    if (allPathData === undefined) {
-      setStates([...states, [pathData]]);
-    } else {
-      setStates([...states, [...allPathData, pathData]]);
-    }
+    setAllPathData([...allPathData, pathData]);
+    setStates([...states, [...allPathData, pathData]]);
     console.log("states: ", states);
     setIsDrawing(false);
   }
