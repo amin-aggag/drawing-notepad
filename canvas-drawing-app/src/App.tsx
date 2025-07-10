@@ -51,6 +51,9 @@ export default function App() {
     setRedoPathData([]);
     // setStates([...states.slice(0, (states.length - 1 - undoCounter))]);
     setIsDrawing(true);
+    if (undoCounter !== 0) {
+      setStates([...states].slice(0, states.length - 1 - undoCounter));
+    }
   }
 
   function handlePointerMove(e) {
@@ -114,11 +117,11 @@ export default function App() {
       </svg>
       </div>
       <div>
-        {(allPathData.length === 0 || allPathData.length === 0) ?
+        {(states.length === 0 || states.length - 1 - undoCounter < 0) ?
           <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo} disabled>Undo</button> :
           <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo}>Undo</button>
         }
-        {(allPathData.length === 0 || states.length === 0) ? 
+        {(states.length === 0 || states.length - 1 - undoCounter < 0 ) ? 
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} disabled>Redo</button> :
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} onClick={redo}>Redo</button>
         }
