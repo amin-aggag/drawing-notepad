@@ -34,13 +34,30 @@ const options = {
   },
 };
 
+// const useStates = (initialState: any) => {
+//   const [index, setIndex] = React.useState<number>(0);
+//   const [states, setStates] = React.useState<string[][]>(initialState);
+//   const setState = (action: any, overwrite: boolean = false) => {
+//     const newState = typeof action === "function" ? action(states[index]) : action;
+//     if (overwrite) {
+//       const statesCopy = [...states];
+//       statesCopy[index] = newState;
+//       setStates(statesCopy);
+//     } else {
+//       const updatedState = [...states].slice(0, index + 1);
+//       setStates([...updatedState, newState]);
+//       setIndex(prevState => prevState + 1);
+//     }
+//   }
+// }
+
 type pointType = (number[] | { x: number; y: number; pressure?: number | undefined; })[]
 
 export default function App() {
   const [points, setPoints] = React.useState<pointType>([]);
   const [states, setStates] = React.useState<string[][]>([]);
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
-  const [undoCounter, setUndoCounter] = React.useState<number>(0);
+  const [index, setIndex] = React.useState<number>(-1);
   const [allPathData, setAllPathData]= React.useState<string[]>([]);
   const [redoPathData, setRedoPathData] = React.useState<string[]>([]);
 
@@ -51,9 +68,6 @@ export default function App() {
     setRedoPathData([]);
     // setStates([...states.slice(0, (states.length - 1 - undoCounter))]);
     setIsDrawing(true);
-    if (undoCounter !== 0) {
-      setStates([...states].slice(0, states.length - 1 - undoCounter));
-    }
   }
 
   function handlePointerMove(e) {
@@ -67,34 +81,39 @@ export default function App() {
   }
 
   function handlePointerUp(e) {
-    setUndoCounter(0);
     setAllPathData([...allPathData, pathData]);
     setStates([...states, [...allPathData, pathData]]);
-    console.log("states: ", states);
+    console.log("states: ", [...states, [...allPathData, pathData]]);
     setIsDrawing(false);
+    setIndex(index + 1);
+    console.log("Index is now: ", index + 1);
+    console.log("states.length = ", states.length + 1);
   }
 
   function undo() {
-    if (allPathData.length > 0) {
+    if (
+      index > -2 &&
+      index <= (states.length + 1) 
+    ) {
       console.log("isDrawing is now: ", isDrawing);
-      if (states[states.length - 1 - (undoCounter + 1)] === undefined) {
-        setAllPathData([]);
-      } else {
-        setAllPathData(states[states.length - 1 - (undoCounter + 1)]);
-      }
-      setUndoCounter(undoCounter + 1);
+      console.log("[...states[index - 1]] = ", [...states[index - 1]]);
+      setAllPathData([...states[index - 1]]);
+      setIndex(index - 1);
+      console.log("Index is now: ", index - 1);
     }
   }
 
   function redo() {
     // if (allPathData.length <= states[states.length - 1].length)
     if (
-      (states.length - 1 - (undoCounter - 1)) > -1 &&
-      (states.length - 1 - (undoCounter - 1)) <= (states.length - 1) 
+      index > -1 &&
+      index <= (states.length - 1) 
     ) {
       console.log("isDrawing is now: ", isDrawing);
-      setAllPathData(states[states.length - 1 - (undoCounter - 1)]);
-      setUndoCounter(undoCounter - 1);
+      setAllPathData([...states[index + 1]]);
+      console.log("[...states[index + 1]] = ", [...states[index + 1]]);
+      setIndex(index + 1);
+      console.log("Index is now: ", index + 1);
     }
   }
 
@@ -117,11 +136,11 @@ export default function App() {
       </svg>
       </div>
       <div>
-        {(states.length === 0 || states.length - 1 - undoCounter < 0) ?
+        {(states.length === 0 || index === -1) ?
           <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo} disabled>Undo</button> :
           <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo}>Undo</button>
         }
-        {(states.length === 0 || states.length - 1 - undoCounter < 0 ) ? 
+        {(states.length === 0 || index === -1 ) ? 
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} disabled>Redo</button> :
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} onClick={redo}>Redo</button>
         }
