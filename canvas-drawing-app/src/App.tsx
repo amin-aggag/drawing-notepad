@@ -59,7 +59,7 @@ export default function App() {
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
   // Index starts at -1 because I want the index to match the current state in the States array, so when
   // the first stroke is drawn, index is at index 0, which is the first element in the States array
-  const [index, setIndex] = React.useState<number>(-1);
+  const [index, setIndex] = React.useState<number>(0);
   const [allPathData, setAllPathData]= React.useState<string[]>([]);
   const [redoPathData, setRedoPathData] = React.useState<string[]>([]);
 
