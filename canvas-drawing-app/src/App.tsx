@@ -55,8 +55,10 @@ type pointType = (number[] | { x: number; y: number; pressure?: number | undefin
 
 export default function App() {
   const [points, setPoints] = React.useState<pointType>([]);
-  const [states, setStates] = React.useState<string[][]>([]);
+  const [states, setStates] = React.useState<string[][]>([[]]);
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
+  // Index starts at -1 because I want the index to match the current state in the States array, so when
+  // the first stroke is drawn, index is at index 0, which is the first element in the States array
   const [index, setIndex] = React.useState<number>(-1);
   const [allPathData, setAllPathData]= React.useState<string[]>([]);
   const [redoPathData, setRedoPathData] = React.useState<string[]>([]);
@@ -82,18 +84,21 @@ export default function App() {
 
   function handlePointerUp(e) {
     setAllPathData([...allPathData, pathData]);
-    setStates([...states, [...allPathData, pathData]]);
-    console.log("states: ", [...states, [...allPathData, pathData]]);
+    let temporaryState = states.slice(0, index + 1);
+    setStates([...temporaryState, [...allPathData, pathData]]);
+    console.log("states: ", [...temporaryState, [...allPathData, pathData]]);
     setIsDrawing(false);
     setIndex(index + 1);
+    // The +1s for both of these console.log is because these values do not update straight away because of 
+    // how state updating in React works
     console.log("Index is now: ", index + 1);
     console.log("states.length = ", states.length + 1);
   }
 
   function undo() {
     if (
-      index > -2 &&
-      index <= (states.length + 1) 
+      index > 0 &&
+      index <= (states.length - 1) 
     ) {
       console.log("isDrawing is now: ", isDrawing);
       console.log("[...states[index - 1]] = ", [...states[index - 1]]);
@@ -107,7 +112,7 @@ export default function App() {
     // if (allPathData.length <= states[states.length - 1].length)
     if (
       index > -1 &&
-      index <= (states.length - 1) 
+      index < (states.length - 1) 
     ) {
       console.log("isDrawing is now: ", isDrawing);
       setAllPathData([...states[index + 1]]);
