@@ -134,16 +134,16 @@ export default function App() {
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
-        style={{ touchAction: "none", position: "absolute", top: "0", left: "0", maxHeight: "90%", maxWidth: "90%", zIndex: "0" }}
+        style={{ touchAction: "none", position: "relative", top: "0", left: "0", height: "842px", width: "595px", zIndex: "1", backgroundColor: "#ffffff" }}
       >
-        {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD} key={index}/>))}
-        {isDrawing && <path d={pathData} />}
+      {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD} key={index}/>))}
+      {isDrawing && <path d={pathData} />}
       </svg>
       </div>
       <div>
         {(states.length === 1 || index <= 0) ?
           <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo} disabled>Undo</button> :
-          <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "1"}} onClick={undo}>Undo</button>
+          <button style={{position: "absolute", top: "0", left: "0", fontSize: "100px", zIndex: "2"}} onClick={undo}>Undo</button>
         }
         {((states.length === 1 && index <= 0) || index === (states.length - 1)) ? 
           <button style={{position: "absolute", top: "0", left: "240px", fontSize: "100px", zIndex: "1"}} disabled>Redo</button> :
