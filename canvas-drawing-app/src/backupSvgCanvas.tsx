@@ -34,18 +34,17 @@ const options = {
   },
 };
 
-type svgPathType = {path: string, color: string}
-
 type pointType = (number[] | { x: number; y: number; pressure?: number | undefined; })[]
 
 export default function SVGCanvas() {
   const [points, setPoints] = React.useState<pointType>([]);
-  const [states, setStates] = React.useState<Array<svgPathType[]>>([[]]);
+  const [states, setStates] = React.useState<string[][]>([[]]);
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
   // Index starts at -1 because I want the index to match the current state in the States array, so when
   // the first stroke is drawn, index is at index 0, which is the first element in the States array
   const [index, setIndex] = React.useState<number>(0);
-  const [allPathData, setAllPathData]= React.useState<svgPathType[]>([]);
+  const [allPathData, setAllPathData]= React.useState<string[]>([]);
+  const [redoPathData, setRedoPathData] = React.useState<string[]>([]);
   const [left, setLeft] = React.useState<number>(0);
   const [top, setTop] = React.useState<number>(0);
   const [touchX, setTouchX] = React.useState<number>(0);
@@ -53,10 +52,10 @@ export default function SVGCanvas() {
   const [width, setWidth] = React.useState<number>(595);
   const [height, setHeight] = React.useState<number>(842);
   const [zoomLevel, setZoomLevel] = React.useState<number>(100);
-  const [color, setColor] = React.useState<string>("black");
+  const [colour, setColour] = React.useState<string>("black");
 
-  const handleTouchStart: React.TouchEventHandler<SVGSVGElement> = (e) => {
-    if (e.touches.length === 2) {
+  const handleTouchStart: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    if (e.touches.length == 2) {
       setTouchX(e.touches[0].pageX);
       console.log("START: e.touches[0].pageX = ", e.touches[0].pageX);
       console.log("START: e.touches[0].pageY = ", e.touches[0].pageY);
@@ -66,8 +65,8 @@ export default function SVGCanvas() {
     }
   }
 
-  const handleTouchMove: React.TouchEventHandler<SVGSVGElement> = (e) => {
-    if (e.touches.length === 2) {
+  const handleTouchMove: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    if (e.touches.length == 2) {
       console.log("MOVE: e.touches[0].pageX = ", e.touches[0].pageX);
       console.log("MOVE: e.touches[0].pageY = ", e.touches[0].pageY);
       console.log("MOVE: top = ", top);
@@ -95,7 +94,7 @@ export default function SVGCanvas() {
     }
   }
 
-  const handleTouchEnd: React.TouchEventHandler<SVGSVGElement> = (e) => {
+  const handleTouchEnd: React.TouchEventHandler<HTMLDivElement> = (e) => {
     if (top < -100) {
       setTop(-100);
     } else if (top > 1500) {
@@ -107,12 +106,13 @@ export default function SVGCanvas() {
     e.target.setPointerCapture(e.pointerId);
     setPoints([[e.pageX - left, e.pageY - top, e.pressure]]);
     // console.log("handlePointerDown: ", points);
+    setRedoPathData([]);
     // setStates([...states.slice(0, (states.length - 1 - undoCounter))]);
     setIsDrawing(true);
   }
 
   function handlePointerMove(e) {
-    if (e.pointerType === "pen" || (e.touches.length === 1)) {
+    if (e.pointerType === "pen") {
       if (e.buttons !== 1) return;
       setPoints([...points, [e.pageX - left, e.pageY - top, e.pressure]]);
       // console.log("handlePointerMove: ", points);
@@ -124,11 +124,11 @@ export default function SVGCanvas() {
   }
 
   function handlePointerUp(e) {
-    if (e.pointerType === "pen" || (e.touches.length === 1)) {
-      setAllPathData([...allPathData, {path: pathData, color: color}]);
+    if (e.pointerType === "pen") {
+      setAllPathData([...allPathData, pathData]);
       let temporaryState = states.slice(0, index + 1);
-      setStates([...temporaryState, [...allPathData, {path: pathData, color: color}]]);
-      console.log("states: ", [...temporaryState, [...allPathData, {path: pathData, color: color}]]);
+      setStates([...temporaryState, [...allPathData, pathData]]);
+      console.log("states: ", [...temporaryState, [...allPathData, pathData]]);
       setIsDrawing(false);
       setIndex(index + 1);
       // The +1s for both of these console.log is because these values do not update straight away because of 
@@ -173,18 +173,18 @@ export default function SVGCanvas() {
   return (
     <div style={{overflow: "hidden"}}>
       <div style={{position: "relative", transform: `translate(${left}px, ${top}px)`}}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <svg
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          style={{ touchAction: "none", position: "relative", top: "0", left: "0", height: `${height}px`, width: `${width}px`, zIndex: "1", backgroundColor: "#ffffff", fill: color }}
+          style={{ touchAction: "none", position: "relative", top: "0", left: "0", height: `${height}px`, width: `${width}px`, zIndex: "1", backgroundColor: "#ffffff", fill: colour }}
         >
-        {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD.path} key={index} fill={pD.color}/>))}
-        {isDrawing && <path d={pathData}/>}
+        {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD} key={index} fill={colour}/>))}
+        {isDrawing && <path d={pathData} />}
       </svg>
       </div>
       <div>
@@ -199,14 +199,14 @@ export default function SVGCanvas() {
         <div style={{position: "absolute", bottom: "0", right: "0px", fontSize: "100px", zIndex: "1", display: "flex", flexDirection: "column", background: "aliceblue"}}>
           <p>Colour</p>
           <div style={{display: "flex"}}>
-            <div style={{height: "40px", width: "40px", background: "black", cursor: "pointer"}} onClick={() => setColor("black")}></div>
-            <div style={{height: "40px", width: "40px", background: "orange", cursor: "pointer"}} onClick={() => ("orange")}></div>
-            <div style={{height: "40px", width: "40px", background: "mediumseagreen", cursor: "pointer"}} onClick={() => setColor("mediumseagreen")}></div>
-            <div style={{height: "40px", width: "40px", background: "tomato", cursor: "pointer"}} onClick={() => setColor("tomato")}></div>
-            <div style={{height: "40px", width: "40px", background: "violet", cursor: "pointer"}} onClick={() => setColor("violet")}></div>
-            <div style={{height: "40px", width: "40px", background: "dodgerblue", cursor: "pointer"}} onClick={() => setColor("dodgerblue")}></div>
-            <div style={{height: "40px", width: "40px", background: "slateblue", cursor: "pointer"}} onClick={() => setColor("slateblue")}></div>
-            <div style={{height: "40px", width: "40px", background: "lightgray", cursor: "pointer"}} onClick={() => setColor("lightgray")}></div>
+            <div style={{height: "40px", width: "40px", background: "black", cursor: "pointer"}} onClick={() => setColour("black")}></div>
+            <div style={{height: "40px", width: "40px", background: "orange", cursor: "pointer"}} onClick={() => setColour("orange")}></div>
+            <div style={{height: "40px", width: "40px", background: "mediumseagreen", cursor: "pointer"}} onClick={() => setColour("mediumseagreen")}></div>
+            <div style={{height: "40px", width: "40px", background: "tomato", cursor: "pointer"}} onClick={() => setColour("tomato")}></div>
+            <div style={{height: "40px", width: "40px", background: "violet", cursor: "pointer"}} onClick={() => setColour("violet")}></div>
+            <div style={{height: "40px", width: "40px", background: "dodgerblue", cursor: "pointer"}} onClick={() => setColour("dodgerblue")}></div>
+            <div style={{height: "40px", width: "40px", background: "slateblue", cursor: "pointer"}} onClick={() => setColour("slateblue")}></div>
+            <div style={{height: "40px", width: "40px", background: "lightgray", cursor: "pointer"}} onClick={() => setColour("lightgray")}></div>
           </div>
         </div>
       </div>
