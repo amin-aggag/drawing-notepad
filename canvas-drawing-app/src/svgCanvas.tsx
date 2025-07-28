@@ -1,6 +1,7 @@
 import * as React from "react";
 import { getStroke } from "perfect-freehand";
 import './App.css';
+import Image from "./image";
 
 const getSvgPathFromStroke = (stroke) => {
   if (!stroke.length) return ""
@@ -39,6 +40,9 @@ export default function SVGCanvas() {
   const [zoomLevel, setZoomLevel] = React.useState<number>(100);
   const [color, setColor] = React.useState<string>("black");
   const [penSize, setPenSize] = React.useState<number>(10);
+
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [imageUrl, setImageUrl] = React.useState<string>("");
 
   const options = {
   size: penSize,
@@ -166,6 +170,14 @@ export default function SVGCanvas() {
     }
   }
 
+  const handleInputChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const url = URL.createObjectURL(file);
+        setImageUrl(url);
+    }
+  }
+
   const stroke = getStroke(points, options);
   const pathData = getSvgPathFromStroke(stroke);
 
@@ -187,6 +199,9 @@ export default function SVGCanvas() {
         >
           {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD.path} key={index} fill={pD.color}/>))}
           {isDrawing && <path d={pathData}/>}
+          <svg>
+            <image href={imageUrl} style={{position: "relative", top: "0", left: "0"}}/>
+          </svg>
         </svg>
       </div>
       <div>
@@ -226,7 +241,7 @@ export default function SVGCanvas() {
         </div>
         <div style={{position: "absolute", bottom: "300px", right: "0px", fontSize: "100px", zIndex: "1", display: "flex", flexDirection: "column", background: "aliceblue"}}>
           <div style={{display: "flex"}}>
-            <input type="file" id="image-upload" hidden />
+            <input type="file" id="image-upload" hidden ref={inputRef} accept="image/png, image/jpeg" onChange={handleInputChange} />
             <label style={{height: "40px", width: "150px", background: "aliceblue", cursor: "pointer", fontSize: "30px"}} onClick={() => {}} htmlFor="image-upload">Add image</label>
           </div>
         </div>
