@@ -169,6 +169,7 @@ export default function SVGCanvas() {
   const stroke = getStroke(points, options);
   const pathData = getSvgPathFromStroke(stroke);
 
+  const imageUpload = document.getElementById("image-upload");
   // console.log("allPathData: ", allPathData);
 
   return (
@@ -184,9 +185,9 @@ export default function SVGCanvas() {
           onTouchEnd={handleTouchEnd}
           style={{ touchAction: "none", position: "relative", top: "0", left: "0", height: `${height}px`, width: `${width}px`, zIndex: "1", backgroundColor: "#ffffff", fill: color }}
         >
-        {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD.path} key={index} fill={pD.color}/>))}
-        {isDrawing && <path d={pathData}/>}
-      </svg>
+          {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD.path} key={index} fill={pD.color}/>))}
+          {isDrawing && <path d={pathData}/>}
+        </svg>
       </div>
       <div>
         {(states.length === 1 || index <= 0) ?
@@ -221,6 +222,12 @@ export default function SVGCanvas() {
             <div style={{height: "40px", width: "40px", background: "aliceblue", cursor: "pointer", fontSize: "30px"}} onClick={() => setPenSize(10)}>10</div>
             <div style={{height: "40px", width: "40px", background: "aliceblue", cursor: "pointer", fontSize: "30px"}} onClick={() => setPenSize(20)}>20</div>
             <div style={{height: "40px", width: "40px", background: "aliceblue", cursor: "pointer", fontSize: "30px"}} onClick={() => setPenSize(30)}>30</div>
+          </div>
+        </div>
+        <div style={{position: "absolute", bottom: "300px", right: "0px", fontSize: "100px", zIndex: "1", display: "flex", flexDirection: "column", background: "aliceblue"}}>
+          <div style={{display: "flex"}}>
+            <input type="file" id="image-upload" hidden />
+            <label style={{height: "40px", width: "150px", background: "aliceblue", cursor: "pointer", fontSize: "30px"}} onClick={() => {}} htmlFor="image-upload">Add image</label>
           </div>
         </div>
       </div>
