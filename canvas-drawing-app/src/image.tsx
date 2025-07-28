@@ -1,16 +1,11 @@
 import React from "react"
 
-export default function Image(image: any, width: number, height: number) {
-  const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  const canvasCtx = canvasRef?.current?.getContext("2d");
-
-  const handleLoad = () => {
-    canvasCtx?.drawImage(image, width, height);
-  }
-
-  canvasRef?.current?.addEventListener("touch", () => {
-
-  })
+export default function Image(imageUrl: string, width: number, height: number, x: number, y: number) {
+  const imageRef = React.useRef<SVGImageElement>(null);
+  const svgRef = React.useRef<SVGSVGElement>(null);
+  const [selected, setSelected] = React.useState<boolean>();
+  const [xValue, setXValue] = React.useState<number>(0);
+  const [yValue, setYValue] = React.useState<number>(0);
 
   const handleTouchStart = () => {
     
@@ -23,17 +18,80 @@ export default function Image(image: any, width: number, height: number) {
   const handleTouchEnd = () => {
 
   }
+
+  const handlePointerDown: React.PointerEventHandler = (e: React.PointerEvent<SVGSVGElement>) => {
+    switch(e.currentTarget.dataset.adjustmentType) {
+      case "bottom-right":
+        break;
+      case "top-right":
+        break;
+      case "bottom-left":
+        break;
+      case "top-left":
+        break;
+      default:
+        break;
+    }
+  }
+
+  const handlePointerMove: React.PointerEventHandler = (e: React.PointerEvent<SVGSVGElement>) => {
+    switch(e.currentTarget.dataset.adjustmentType) {
+      case "bottom-right":
+        break;
+      case "top-right":
+        break;
+      case "bottom-left":
+        break;
+      case "top-left":
+        break;
+      default:
+        break;
+    }
+  }
+  
+  const handlePointerUp: React.PointerEventHandler = (e: React.PointerEvent<SVGSVGElement>) => {
+    switch(e.currentTarget.dataset.adjustmentType) {
+      case "bottom-right":
+        break;
+      case "top-right":
+        break;
+      case "bottom-left":
+        break;
+      case "top-left":
+        break;
+      default:
+        break;
+    }
+  }
   
   return (
-    <canvas 
-      ref={canvasRef}
-      width={`${width + 10}px`}
-      height={`${height + 10}px`}
-      onLoad={handleLoad}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+    <svg
+      ref={svgRef}
     >
-    </canvas>
+      <svg
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+      >
+        <circle cx={x + width} cy={y + height} r={10} fill={"blue"} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp} data-adjustment-type={"bottom-right"}></circle >
+        <circle cx={x + width} cy={y} r={10} fill={"blue"} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp} data-adjustment-type={"top-right"}></circle>
+        <circle cx={x} cy={y + height} r={10} fill={"blue"} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp} data-adjustment-type={"bottom-left"}></circle>
+        <circle cx={x} cy={y} r={10} fill={"blue"} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp} data-adjustment-type={"top-left"}></circle>
+      </svg>
+      <svg>
+        <image
+          ref={imageRef}
+          width={`${width}px`}
+          height={`${height}px`}
+          x={x}
+          y={y}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          href={imageUrl}
+        >
+        </image>
+      </svg>
+    </svg>
   )
 }
