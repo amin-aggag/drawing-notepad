@@ -42,7 +42,8 @@ export default function SVGCanvas() {
   const [penSize, setPenSize] = React.useState<number>(10);
 
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [imageUrl, setImageUrl] = React.useState<string>("");
+  const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
+  const [imageUrlList, setImageUrlList] = React.useState<string[]>([]);
 
   const options = {
   size: penSize,
@@ -174,7 +175,8 @@ export default function SVGCanvas() {
     const file = e.target.files[0];
     if (file) {
         const url = URL.createObjectURL(file);
-        setImageUrl(url);
+        // console.log(file);
+        setImageUrlList([...imageUrlList, url]);
     }
   }
 
@@ -197,7 +199,7 @@ export default function SVGCanvas() {
           onTouchEnd={handleTouchEnd}
           style={{ touchAction: "none", position: "relative", top: "0", left: "0", height: `${height}px`, width: `${width}px`, zIndex: "1", backgroundColor: "#ffffff", fill: color }}
         >
-        <image href={imageUrl} style={{position: "absolute", top: "0", left: "0", zIndex: 10}}/>
+        {imageUrlList.map((url, index) => (<image href={url} key={index} style={{position: "absolute", top: "0", left: "0", zIndex: 10, width: "500px", height: "10px"}}/>))}
           {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD.path} key={index} fill={pD.color} style={{zIndex: 100}}/>))}
           {isDrawing && <path d={pathData} style={{zIndex: 100}}/>}
         </svg>
