@@ -1,6 +1,6 @@
 import * as React from "react";
 import './App.css';
-import SVGCanvas from "./svgCanvas";
+import SVGCanvas from "./components/canvas/svgCanvas";
 
 export default function App() {
 

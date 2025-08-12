@@ -1,11 +1,15 @@
 import React from "react"
+import useImageList from "../../hooks/useImageList";
 
-export default function Image(imageUrl: string, width: number, height: number, x: number, y: number) {
+export default function Image(
+  // imageUrl: string, width: number, height: number, x: number, y: number
+) {
   const imageRef = React.useRef<SVGImageElement>(null);
   const svgRef = React.useRef<SVGSVGElement>(null);
   const [selected, setSelected] = React.useState<boolean>();
   const [xValue, setXValue] = React.useState<number>(0);
   const [yValue, setYValue] = React.useState<number>(0);
+  const { imageUrl, setImageUrl, imageUrlList, setImageUrlList } = useImageList();
 
   const handleTouchStart = () => {
     
@@ -17,6 +21,15 @@ export default function Image(imageUrl: string, width: number, height: number, x
 
   const handleTouchEnd = () => {
 
+  }
+
+  const handleInputChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const url = URL.createObjectURL(file);
+        // console.log(file);
+        setImageUrlList([...imageUrlList, url]);
+    }
   }
 
   const handlePointerDown: React.PointerEventHandler = (e: React.PointerEvent<SVGSVGElement>) => {
