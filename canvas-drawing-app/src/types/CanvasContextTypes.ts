@@ -1,6 +1,6 @@
 type CanvasContextTypes = {
   canvasStates: {
-    points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, pathData, setPathData, isDrawing, setIsDrawing, stroke, setStroke, undo, redo
+    points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, pathData, setPathData, isDrawing, setIsDrawing, undo, redo
   },
   position: {
     left, setLeft, top, setTop

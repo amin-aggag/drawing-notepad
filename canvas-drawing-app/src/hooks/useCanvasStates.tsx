@@ -12,7 +12,6 @@ export default function useCanvasStates() {
   const [allPathData, setAllPathData]= React.useState<svgPathType[]>([]);
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
   const [pathData, setPathData] = React.useState();
-  const [stroke, setStroke] = React.useState<pointType>([]);
 
   function undo() {
     if (
@@ -41,5 +40,5 @@ export default function useCanvasStates() {
     }
   }
 
-  return { points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, isDrawing, setIsDrawing, pathData, setPathData, stroke, setStroke, undo, redo }; 
+  return { points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, isDrawing, setIsDrawing, pathData, setPathData, undo, redo }; 
 }

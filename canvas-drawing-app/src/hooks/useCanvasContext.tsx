@@ -43,7 +43,7 @@ export const useCanvasContext: () => CanvasContextTypes = () => {
 export const useCanvasStateVars = () => {
 
   // --- State variables ---
-  const { points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, setPathData, isDrawing, setIsDrawing, setStroke, undo, redo } = useCanvasStates();
+  const { points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, setPathData, isDrawing, setIsDrawing, undo, redo } = useCanvasStates();
   const { left, setLeft, top, setTop } = usePosition();
   const { touchX, setTouchX, touchY, setTouchY } = useTouch();
   const { imageUrl, setImageUrl, imageUrlList, setImageUrlList } = useImageList();
@@ -109,7 +109,7 @@ export const useCanvasStateVars = () => {
   
   return {
     canvasStates: {
-      points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, pathData, setPathData, isDrawing, setIsDrawing, stroke, setStroke, undo, redo
+      points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, pathData, setPathData, isDrawing, setIsDrawing, undo, redo
     },
     position: {
       left, setLeft, top, setTop
