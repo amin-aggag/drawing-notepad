@@ -22,5 +22,8 @@ type CanvasContextTypes = {
   },
   handlePointer: {
     handlePointerDown, handlePointerMove, handlePointerUp
+  },
+  movingCanvas: {
+    isMovingCanvas, setIsMovingCanvas
   }
 }

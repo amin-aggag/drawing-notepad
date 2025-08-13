@@ -1,8 +1,8 @@
-import * as React from "react";
+import { useState } from "react";
 
 export function useImageList() {
-  const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
-  const [imageUrlList, setImageUrlList] = React.useState<string[]>([]);
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
+  const [imageUrlList, setImageUrlList] = useState<string[]>([]);
 
   return { imageUrl, setImageUrl, imageUrlList, setImageUrlList };
 }

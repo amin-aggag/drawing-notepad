@@ -9,12 +9,13 @@ export default function DrawingCanvas() {
   const { allPathData, pathData, isDrawing } = canvasStateVars.canvasStates;
   const { color } = canvasStateVars.penSize;
   const { imageUrlList } = canvasStateVars.imageList;
+  const { isMovingCanvas } = canvasStateVars.movingCanvas;
 
   return (
       <svg
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
+        onPointerDown={isMovingCanvas ? () => {} : handlePointerDown}
+        onPointerMove={isMovingCanvas ? () => {} : handlePointerMove}
+        onPointerUp={isMovingCanvas ? () => {} : handlePointerUp}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}

@@ -1,9 +1,8 @@
-import * as React from 'react';
-import usePosition from './usePosition';
+import { useState } from 'react';
 
 export default function useTouch() {
-  const [touchX, setTouchX] = React.useState<number>(0);
-  const [touchY, setTouchY] = React.useState<number>(0);
+  const [touchX, setTouchX] = useState<number>(0);
+  const [touchY, setTouchY] = useState<number>(0);
 
   return { touchX, setTouchX, touchY, setTouchY };
 }

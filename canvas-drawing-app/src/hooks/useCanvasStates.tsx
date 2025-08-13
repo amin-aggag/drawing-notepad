@@ -1,16 +1,16 @@
-import * as React from "react";
+import { useState } from "react";
 
 export type svgPathType = {path: string, color: string}
 
 export type pointType = (number[] | { x: number; y: number; pressure?: number | undefined; })[]
 
 export default function useCanvasStates() {
-  const [points, setPoints] = React.useState<pointType>([]);
-  const [states, setStates] = React.useState<Array<svgPathType[]>>([[]]);
-  const [index, setIndex] = React.useState<number>(0);
-  const [allPathData, setAllPathData]= React.useState<svgPathType[]>([]);
-  const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
-  const [pathData, setPathData] = React.useState();
+  const [points, setPoints] = useState<pointType>([]);
+  const [states, setStates] = useState<Array<svgPathType[]>>([[]]);
+  const [index, setIndex] = useState<number>(0);
+  const [allPathData, setAllPathData]= useState<svgPathType[]>([]);
+  const [isDrawing, setIsDrawing] = useState<boolean>(false);
+  const [pathData, setPathData] = useState();
 
   function undo() {
     if (

@@ -8,6 +8,7 @@ import usePen from "./usePen";
 import usePosition from "./usePosition";
 import useTouch from "./useTouch";
 import getStroke from "perfect-freehand";
+import useIsMovingCanvas from "./useIsMovingCanvas";
 
 export type svgPathType = {path: string, color: string}
 
@@ -48,6 +49,7 @@ export const useCanvasStateVars = () => {
   const { imageUrl, setImageUrl, imageUrlList, setImageUrlList } = useImageList();
   const { width, setWidth, height, setHeight } = useCanvasProperties();
   const { color, setColor, penSize, setPenSize } = usePen();
+  const { isMovingCanvas, setIsMovingCanvas } = useIsMovingCanvas();
 
   // --- Handlers ---
   const { handleTouchStartGeneral, handleTouchMoveGeneral, handleTouchEndGeneral } = useHandleTouch();
@@ -80,15 +82,15 @@ export const useCanvasStateVars = () => {
   });
 
   const handleTouchStart = (e) => {
-    handleTouchStartGeneral(e, left, top, setTouchX, setTouchY);
+    handleTouchStartGeneral(e, left, top, setTouchX, setTouchY, setIsMovingCanvas);
   }
 
   const handleTouchMove  = (e) => {
-    handleTouchMoveGeneral(e, left, top, setLeft, setTop, touchX, touchY);
+    handleTouchMoveGeneral(e, left, top, setLeft, setTop, touchX, touchY, setIsMovingCanvas);
   }
 
   const handleTouchEnd = (e) => {
-    handleTouchEndGeneral(e, top, setTop);
+    handleTouchEndGeneral(e, top, setTop, setIsMovingCanvas);
   }
 
   function handlePointerDown(e) {
@@ -130,6 +132,9 @@ export const useCanvasStateVars = () => {
     },
     handlePointer: {
       handlePointerDown, handlePointerMove, handlePointerUp
+    },
+    movingCanvas: {
+      isMovingCanvas, setIsMovingCanvas
     }
   };
 };

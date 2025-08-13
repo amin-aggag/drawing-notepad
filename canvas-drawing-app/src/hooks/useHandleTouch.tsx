@@ -1,6 +1,7 @@
 export default function useHandleTouch() {
-  const handleTouchStartGeneral = (e, left, top, setTouchX, setTouchY) => {
+  const handleTouchStartGeneral = (e, left, top, setTouchX, setTouchY, setIsMovingCanvas) => {
     if (e.touches.length === 2) {
+      setIsMovingCanvas(true);
       setTouchX(e.touches[0].pageX);
       console.log("START: e.touches[0].pageX = ", e.touches[0].pageX);
       console.log("START: e.touches[0].pageY = ", e.touches[0].pageY);
@@ -10,8 +11,9 @@ export default function useHandleTouch() {
     }
   }
 
-  const handleTouchMoveGeneral = (e, left, top, setLeft, setTop, touchX, touchY) => {
+  const handleTouchMoveGeneral = (e, left, top, setLeft, setTop, touchX, touchY, setIsMovingCanvas) => {
     if (e.touches.length === 2) {
+      setIsMovingCanvas(true);
       console.log("MOVE: e.touches[0].pageX = ", e.touches[0].pageX);
       console.log("MOVE: e.touches[0].pageY = ", e.touches[0].pageY);
       console.log("MOVE: top = ", top);
@@ -39,7 +41,8 @@ export default function useHandleTouch() {
     }
   }
 
-  const handleTouchEndGeneral = (e, top, setTop) => {
+  const handleTouchEndGeneral = (e, top, setTop, setIsMovingCanvas) => {
+    setIsMovingCanvas(false);
     if (top < -100) {
       setTop(-100);
     } else if (top > 1500) {

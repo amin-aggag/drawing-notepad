@@ -1,8 +1,8 @@
-import * as React from "react";
+import { useState } from "react";
 
 export default function useCanvasProperties() {
-  const [width, setWidth] = React.useState<number>(595);
-  const [height, setHeight] = React.useState<number>(842);
+  const [width, setWidth] = useState<number>(595);
+  const [height, setHeight] = useState<number>(842);
 
   return { width, setWidth, height, setHeight };
 }
