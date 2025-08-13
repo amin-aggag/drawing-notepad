@@ -36,7 +36,6 @@ export const useCanvasContext: () => CanvasContextTypes = () => {
   if (canvasContext === undefined) {
     throw new Error("useCanvasContext must be used with a CanvasContext.Provider");
   }
-  
   return canvasContext;
 }
 

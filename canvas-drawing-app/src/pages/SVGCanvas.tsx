@@ -2,7 +2,7 @@ import * as React from "react";
 import '../App.css';
 import DrawingCanvas from "../components/canvas/DrawingCanvas";
 import { CanvasContext, useCanvasStateVars } from "../hooks/useCanvasContext";
-import Ui from "../components/ui/Ui";
+import UI from "../components/ui/UI";
 
 export default function SVGCanvas() {
 
@@ -19,7 +19,7 @@ export default function SVGCanvas() {
           <DrawingCanvas/>
         </div>
         <div>
-          <Ui/>
+          <UI/>
         </div>
       </div>
     </CanvasContext.Provider>

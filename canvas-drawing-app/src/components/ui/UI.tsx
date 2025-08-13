@@ -3,11 +3,11 @@ import usePen from "../../hooks/usePen";
 import { useCanvasContext } from "../../hooks/useCanvasContext";
 import { handleImgInputChangeGeneral } from "../../hooks/useImageList";
 
-const colorArray = [ "black", "orange", "mediumseagreen", "tomato", "violet", "dodgerblue", "slateblue", "lightgray" ]
+const colorArray = [ "black", "orange", "mediumseagreen", "tomato", "violet", "dodgerblue", "slateblue", "lightgray" ];
 
-const penSizeArray = [ 1, 2, 4, 6, 8, 10, 20, 30 ]
+const penSizeArray = [ 1, 2, 4, 6, 8, 10, 20, 30 ];
 
-export default function Ui() {
+export default function UI() {
   const canvasStateVars: CanvasContextTypes = useCanvasContext();
 
   const { states, index } = canvasStateVars.canvasStates;
