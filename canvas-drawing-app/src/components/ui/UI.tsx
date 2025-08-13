@@ -17,16 +17,18 @@ export default function UI() {
 
   return (
     <>
-      <div style={{position: "absolute",top: "0", left: "0px", fontSize: "50px", zIndex: "1", display: "flex", flexDirection: "row", background: "aliceblue", width: "100%", height: "100px", marginBlock: "auto", alignItems: "center", padding: "17px", borderBottomRightRadius: "10px", borderBottomLeftRadius: "10px", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray",}}>
-        {(states.length === 1 || index <= 0) ?
-          <button style={{ fontSize: "50px", zIndex: "1", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", marginRight: "15px", paddingTop: "0"}} onClick={undo} disabled>Undo</button> :
-          <button style={{fontSize: "50px", zIndex: "2", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", marginRight: "15px", paddingTop: "0"}} onClick={undo}>Undo</button>
-        }
-        {((states.length === 1 && index <= 0) || index === (states.length - 1)) ? 
-          <button style={{fontSize: "50px", zIndex: "1", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", paddingTop: "0"}} disabled>Redo</button> :
-          <button style={{fontSize: "50px", zIndex: "1", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", paddingTop: "0"}} onClick={redo}>Redo</button>
-        }
-        <div style={{zIndex: "1", display: "flex", flexDirection: "column", background: "aliceblue", height: "75px", marginLeft: "20px"}}>
+      <div style={{position: "absolute",top: "0", left: "0px", fontSize: "50px", zIndex: "1", display: "flex", flexDirection: "row", background: "aliceblue", width: "100%", minHeight: "100px", marginBlock: "auto", alignItems: "center", padding: "17px", borderBottomRightRadius: "10px", borderBottomLeftRadius: "10px", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", flexWrap: "wrap", justifyContent: "space-around"}}>
+        <div>
+          {(states.length === 1 || index <= 0) ?
+            <button style={{ fontSize: "50px", zIndex: "1", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", marginRight: "15px", paddingTop: "0"}} onClick={undo} disabled>Undo</button> :
+            <button style={{fontSize: "50px", zIndex: "2", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", marginRight: "15px", paddingTop: "0"}} onClick={undo}>Undo</button>
+          }
+          {((states.length === 1 && index <= 0) || index === (states.length - 1)) ? 
+            <button style={{fontSize: "50px", zIndex: "1", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", paddingTop: "0"}} disabled>Redo</button> :
+            <button style={{fontSize: "50px", zIndex: "1", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", paddingTop: "0"}} onClick={redo}>Redo</button>
+          }
+        </div>
+        <div style={{zIndex: "1", display: "flex", flexDirection: "column", background: "aliceblue", height: "75px", marginTop: "5px"}}>
           <p style={{ marginBottom: "5px", fontSize: "20px"}}>Pen size: {penSize}</p>
           <div style={{display: "flex"}}>
             {penSizeArray.map((penSize, index)=>(
@@ -34,7 +36,7 @@ export default function UI() {
             ))}
           </div>
         </div>
-        <div style={{zIndex: "1", display: "flex", flexDirection: "column", background: "aliceblue", height: "75px", marginLeft: "10px"}}>
+        <div style={{zIndex: "1", display: "flex", flexDirection: "column", background: "aliceblue", height: "75px"}}>
           <p style={{ fontSize: "20px", marginBottom: "5px" }}>Colour: {String(color).charAt(0).toUpperCase() + String(color).slice(1)}</p>
           <div style={{display: "flex"}}>
             {colorArray.map((color, index)=>(
