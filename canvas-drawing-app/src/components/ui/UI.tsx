@@ -10,7 +10,7 @@ export default function UI() {
   const canvasStateVars: CanvasContextTypes = useCanvasContext();
 
   const { states, index } = canvasStateVars.canvasStates;
-  const { setColor, penSize, setPenSize } = canvasStateVars.penSize;
+  const { color, setColor, penSize, setPenSize } = canvasStateVars.penSize;
   const { undo, redo } = canvasStateVars.canvasStates;
   
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,7 +35,7 @@ export default function UI() {
           </div>
         </div>
         <div style={{zIndex: "1", display: "flex", flexDirection: "column", background: "aliceblue", height: "75px", marginLeft: "10px"}}>
-          <p style={{ fontSize: "20px", marginBottom: "5px" }}>Colour</p>
+          <p style={{ fontSize: "20px", marginBottom: "5px" }}>Colour: {String(color).charAt(0).toUpperCase() + String(color).slice(1)}</p>
           <div style={{display: "flex"}}>
             {colorArray.map((color, index)=>(
               <button style={{height: "40px", width: "40px", background: color, cursor: "pointer", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", marginRight: "10px"}} key={index} onClick={() => setColor(color) }></button>
