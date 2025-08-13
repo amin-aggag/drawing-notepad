@@ -3,7 +3,6 @@ import useCanvasProperties from "./useCanvasProperties";
 import useCanvasStates from "./useCanvasStates";
 import useHandlePointer from "./useHandlePointer";
 import useHandleTouch from "./useHandleTouch";
-import { useImageList } from "./useImageList";
 import usePen from "./usePen";
 import usePosition from "./usePosition";
 import useTouch from "./useTouch";
@@ -46,7 +45,6 @@ export const useCanvasStateVars = () => {
   const { points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, setPathData, isDrawing, setIsDrawing, undo, redo } = useCanvasStates();
   const { left, setLeft, top, setTop } = usePosition();
   const { touchX, setTouchX, touchY, setTouchY } = useTouch();
-  const { imageUrl, setImageUrl, imageUrlList, setImageUrlList } = useImageList();
   const { width, setWidth, height, setHeight } = useCanvasProperties();
   const { color, setColor, penSize, setPenSize } = usePen();
   const { isMovingCanvas, setIsMovingCanvas } = useIsMovingCanvas();
@@ -117,9 +115,6 @@ export const useCanvasStateVars = () => {
     },
     touch: {
       touchX, setTouchX, touchY, setTouchY
-    },
-    imageList: {
-      imageUrl, setImageUrl, imageUrlList, setImageUrlList
     },
     canvasProperties: {
       width, setWidth, height, setHeight

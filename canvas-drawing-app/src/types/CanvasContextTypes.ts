@@ -8,9 +8,6 @@ type CanvasContextTypes = {
   touch: {
     touchX, setTouchX, touchY, setTouchY
   },
-  imageList: {
-    imageUrl, setImageUrl, imageUrlList, setImageUrlList
-  },
   canvasProperties: {
     width, setWidth, height, setHeight
   },

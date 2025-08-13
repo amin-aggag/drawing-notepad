@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import usePen from "../../hooks/usePen";
 import { useCanvasContext } from "../../hooks/useCanvasContext";
-import { handleImgInputChangeGeneral } from "../../hooks/useImageList";
 
 const colorArray = [ "black", "orange", "mediumseagreen", "tomato", "violet", "dodgerblue", "slateblue", "lightgray" ];
 
@@ -11,8 +10,6 @@ export default function UI() {
   const canvasStateVars: CanvasContextTypes = useCanvasContext();
 
   const { states, index } = canvasStateVars.canvasStates;
-  const { setImageUrlList, imageUrlList } = canvasStateVars.imageList;
-  const handleImgInputChange = (e) => handleImgInputChangeGeneral(e, setImageUrlList, imageUrlList);
   const { setColor, penSize, setPenSize } = canvasStateVars.penSize;
   const { undo, redo } = canvasStateVars.canvasStates;
   
@@ -43,12 +40,6 @@ export default function UI() {
             {colorArray.map((color, index)=>(
               <button style={{height: "40px", width: "40px", background: color, cursor: "pointer", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", marginRight: "10px"}} key={index} onClick={() => setColor(color) }></button>
             ))}
-          </div>
-        </div>
-        <div style={{fontSize: "100px", zIndex: "1", display: "flex", flexDirection: "column", background: "aliceblue", marginLeft: "20px"}}>
-          <div style={{display: "flex"}}>
-            <input type="file" id="image-upload" hidden ref={inputRef} accept="image/png, image/jpeg" onChange={handleImgInputChange} />
-            <label style={{height: "40px", width: "150px", background: "aliceblue", cursor: "pointer", fontSize: "20px", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", textAlign: "center", paddingTop: "5px"}} onClick={() => {}} htmlFor="image-upload">Add image</label>
           </div>
         </div>
       </div>
