@@ -7,10 +7,12 @@ export type pointType = (number[] | { x: number; y: number; pressure?: number | 
 export default function useCanvasStates() {
   const [points, setPoints] = React.useState<pointType>([]);
   const [states, setStates] = React.useState<Array<svgPathType[]>>([[]]);
-  // Index starts at 0 instead of -1 like before there is already a first element inside of the state: the state with no drawings
+  // Index starts at 0 instead of -1 like before because there is already a first element inside of the state: the state with no drawings
   const [index, setIndex] = React.useState<number>(0);
   const [allPathData, setAllPathData]= React.useState<svgPathType[]>([]);
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
+  const [pathData, setPathData] = React.useState();
+  const [stroke, setStroke] = React.useState<pointType>([]);
 
   function undo() {
     if (
@@ -39,5 +41,5 @@ export default function useCanvasStates() {
     }
   }
 
-  return { points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, isDrawing, setIsDrawing, undo, redo }; 
+  return { points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, isDrawing, setIsDrawing, pathData, setPathData, stroke, setStroke, undo, redo }; 
 }
