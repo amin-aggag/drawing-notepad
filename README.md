@@ -28,7 +28,7 @@ AI was not used to generate any code in this repository. All code is my own.
 
 👆 Touch and mouse support
 
-🖼️ Sleek and undistracting design
+🖼️ Sleek and undistracting UI design
 
 ## Planned features
 
