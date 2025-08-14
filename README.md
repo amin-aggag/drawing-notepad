@@ -1,4 +1,4 @@
-# Drawing Notepad 📝👨‍🎨
+# Drawing Notepad 📝🖌️
 
 A drawing app that supports stylus, mouse and touch input. With a sleek and minimal design that is responsive on desktop and mobile, it works anywhere as the sketchpad of your next big idea.
 
