@@ -1,4 +1,5 @@
 import { CanvasContext, useCanvasContext } from "../../hooks/useCanvasContext";
+import { CanvasContextTypes } from "../../types/CanvasContextTypes";
 
 export default function DrawingCanvas() {
   const canvasStateVars: CanvasContextTypes = useCanvasContext();

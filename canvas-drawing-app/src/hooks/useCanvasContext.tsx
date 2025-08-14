@@ -8,6 +8,7 @@ import usePosition from "./usePosition";
 import useTouch from "./useTouch";
 import getStroke from "perfect-freehand";
 import useIsMovingCanvas from "./useIsMovingCanvas";
+import { CanvasContextTypes } from "../types/CanvasContextTypes";
 
 export type svgPathType = {path: string, color: string}
 

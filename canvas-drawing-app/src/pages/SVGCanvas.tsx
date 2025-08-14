@@ -2,6 +2,7 @@ import '../App.css';
 import DrawingCanvas from "../components/canvas/DrawingCanvas";
 import { CanvasContext, useCanvasStateVars } from "../hooks/useCanvasContext";
 import UI from "../components/ui/UI";
+import { CanvasContextTypes } from '../types/CanvasContextTypes';
 
 export default function SVGCanvas() {
 

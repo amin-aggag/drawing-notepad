@@ -1,4 +1,4 @@
-type CanvasContextTypes = {
+export type CanvasContextTypes = {
   canvasStates: {
     points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, pathData, setPathData, isDrawing, setIsDrawing, undo, redo
   },

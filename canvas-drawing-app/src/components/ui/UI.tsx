@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import usePen from "../../hooks/usePen";
 import { useCanvasContext } from "../../hooks/useCanvasContext";
+import { CanvasContextTypes } from "../../types/CanvasContextTypes";
 
 const colorArray = [ "black", "orange", "mediumseagreen", "tomato", "violet", "dodgerblue", "slateblue", "lightgray" ];
 
