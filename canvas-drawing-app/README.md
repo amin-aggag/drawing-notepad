@@ -1,12 +1,54 @@
-# React + Vite
+# Drawing Notepad 📝👨‍🎨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A drawing app that supports stylus, mouse and touch input. With a sleek and minimal design that is responsive on desktop and mobile, it works anywhere as the next sketchpad to your next big idea.
 
-Currently, two official plugins are available:
+[Drawing Notepad preview - A house on a hill with two hills with trees behind it](/src/assets/Drawing%20Notepad%20Preview%20Image.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies used
 
-## Expanding the ESLint configuration
+[React logo](/src/assets/react.svg) React
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[TypeScript logo](/src/assets/Typescript_logo_2020.svg) TypeScript
+
+[Vite logo](/src/assets/Vitejs-logo.svg) Vite
+
+I designed the code to be **reusable**, **maintainable**, **clean** and easy to add features to by using React design patterns including custom hooks and the use of `useContext()` for state management throughout the component tree as well as SOLID principles, including the Single-Responsibility principle and Open-Closed principle. 
+
+AI was not used to generate any code in this repository. All code is my own.
+
+## Features
+
+🖊️ Various pens sizes
+
+🎨 Various colors to choose from
+
+🤚 A moveable canvas to draw on (two fingers to pan)
+
+↩️ Undo and redo functionality
+
+👆 Touch and mouse support
+
+🖼️ Sleek and undistracting design
+
+## Planned features
+
+📁 File system of notes/drawings
+
+💾 Saving notes and importing/exporting 
+
+📄 Custom canvas size
+
+## Running the app locally
+
+Clone this repository: `git clone <repository-link>`
+
+Run `cd canvas-drawing-app; npm i`
+
+Run `npm run dev`
+
+The app should now be working on [http://localhost:5173](http://localhost:5173)!
+
+## Known bugs
+
+When moving the canvas with two fingers, dots from the touch input are registered as actual drawings. This will be fixed soon. For now, they can be undone and drawing can continue as usual.
+
