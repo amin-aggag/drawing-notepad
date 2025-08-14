@@ -1,6 +1,6 @@
 # Drawing Notepad 📝👨‍🎨
 
-A drawing app that supports stylus, mouse and touch input. With a sleek and minimal design that is responsive on desktop and mobile, it works anywhere as the sketchpad to your next big idea.
+A drawing app that supports stylus, mouse and touch input. With a sleek and minimal design that is responsive on desktop and mobile, it works anywhere as the sketchpad of your next big idea.
 
 ![Drawing Notepad preview - A house on a hill with two hills with trees behind it](/canvas-drawing-app/src/assets/Drawing%20Notepad%20Preview%20Image.png)
 
