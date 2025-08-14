@@ -2,15 +2,15 @@
 
 A drawing app that supports stylus, mouse and touch input. With a sleek and minimal design that is responsive on desktop and mobile, it works anywhere as the next sketchpad to your next big idea.
 
-[Drawing Notepad preview - A house on a hill with two hills with trees behind it](/src/assets/Drawing%20Notepad%20Preview%20Image.png)
+[Drawing Notepad preview - A house on a hill with two hills with trees behind it](/canvas-drawing-app/src/assets/Drawing%20Notepad%20Preview%20Image.png)
 
 ## Technologies used
 
-[React logo](/src/assets/react.svg) React
+[React logo](/canvas-drawing-app/src/assets/react.svg) React
 
-[TypeScript logo](/src/assets/Typescript_logo_2020.svg) TypeScript
+[TypeScript logo](/canvas-drawing-app/src/assets/Typescript_logo_2020.svg) TypeScript
 
-[Vite logo](/src/assets/Vitejs-logo.svg) Vite
+[Vite logo](/canvas-drawing-app/src/assets/Vitejs-logo.svg) Vite
 
 I designed the code to be **reusable**, **maintainable**, **clean** and easy to add features to by using React design patterns including custom hooks and the use of `useContext()` for state management throughout the component tree as well as SOLID principles, including the Single-Responsibility principle and Open-Closed principle. 
 
