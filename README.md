@@ -14,6 +14,8 @@ A drawing app that supports stylus, mouse and touch input. With a sleek and mini
 
 I designed the code to be **reusable**, **maintainable**, **clean** and easy to add features to by using React design patterns including custom hooks and the use of `useContext()` for state management throughout the component tree as well as SOLID principles, including the Single-Responsibility principle and Open-Closed principle. 
 
+None of this code came from any course or YouTube tutorial. This project was made on my own.
+
 ## Features
 
 🖊️ Various pens sizes
