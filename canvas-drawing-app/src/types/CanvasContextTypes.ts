@@ -22,5 +22,8 @@ export type CanvasContextTypes = {
   },
   movingCanvas: {
     isMovingCanvas, setIsMovingCanvas
+  },
+  canvasWheel: {
+    handleWheel
   }
 }

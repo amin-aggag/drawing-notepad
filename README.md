@@ -22,7 +22,7 @@ None of this code came from any course or YouTube tutorial. This project was mad
 
 🎨 Various colors to choose from
 
-🤚 A moveable canvas to draw on (two fingers to pan)
+🤚 A moveable canvas to draw on (two fingers or trackpad gestures to pan)
 
 ↩️ Undo and redo functionality
 
@@ -37,6 +37,8 @@ None of this code came from any course or YouTube tutorial. This project was mad
 💾 Saving notes and importing/exporting 
 
 📄 Custom canvas size
+
+↗️ Zooming canvas in and out
 
 ## Running the app locally
 

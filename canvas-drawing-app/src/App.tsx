@@ -10,7 +10,7 @@ export default function App() {
     <div
       className="svgCanvasWrapper"
       ref={svgCanvasWrapper}
-      style={{ position: "absolute", top: 0, left: 0, height: "100%", width: "100%", overflow: "hidden"}}
+      style={{ position: "absolute", top: 0, left: 0, height: "100%", width: "100%", overflow: "hidden", overscrollBehavior: "none"}}
     >
       <SVGCanvas />
     </div>

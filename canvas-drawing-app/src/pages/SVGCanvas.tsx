@@ -8,13 +8,19 @@ export default function SVGCanvas() {
 
   const canvasStateVars: CanvasContextTypes = useCanvasStateVars();
   const { left, top } = canvasStateVars.position;
+  const { handleWheel } = canvasStateVars.canvasWheel;
+  const { isMovingCanvas } = canvasStateVars.movingCanvas;
 
   return (
     <CanvasContext.Provider value={canvasStateVars}>
-      <div style={{overflow: "hidden"}}>
-        <div style={{position: "relative", transform: `translate(${left}px, ${top}px)`}}
+      <div style={{overflow: "scroll", overscrollBehavior: "none", scrollbarWidth: "none"}}
+      >
+        <div
+          onWheelCapture={isMovingCanvas ? () => {} : handleWheel}
         >
-          <DrawingCanvas/>
+          <div style={{position: "relative", transform: `translate(${left}px, ${top}px)`}}>
+            <DrawingCanvas/>
+          </div>
         </div>
         <div>
           <UI/>

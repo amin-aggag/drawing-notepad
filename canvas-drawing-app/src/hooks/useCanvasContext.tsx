@@ -9,6 +9,7 @@ import useTouch from "./useTouch";
 import getStroke from "perfect-freehand";
 import useIsMovingCanvas from "./useIsMovingCanvas";
 import { CanvasContextTypes } from "../types/CanvasContextTypes";
+import useCanvasWheel from "./useCanvasWheel";
 
 export type svgPathType = {path: string, color: string}
 
@@ -49,6 +50,7 @@ export const useCanvasStateVars = () => {
   const { width, setWidth, height, setHeight } = useCanvasProperties();
   const { color, setColor, penSize, setPenSize } = usePen();
   const { isMovingCanvas, setIsMovingCanvas } = useIsMovingCanvas();
+  const { handleWheelGeneral } = useCanvasWheel();
 
   // --- Handlers ---
   const { handleTouchStartGeneral, handleTouchMoveGeneral, handleTouchEndGeneral } = useHandleTouch();
@@ -104,6 +106,10 @@ export const useCanvasStateVars = () => {
     handlePointerUpGeneral(e, allPathData, setAllPathData, pathData, color, states, setStates, setIsDrawing, index, setIndex);
   }
 
+  function handleWheel(e) {
+    handleWheelGeneral(e, setLeft, setTop);
+  }
+
   const stroke = getStroke(points, options);
   const pathData = (getSvgPathFromStroke(stroke));
   
@@ -131,6 +137,9 @@ export const useCanvasStateVars = () => {
     },
     movingCanvas: {
       isMovingCanvas, setIsMovingCanvas
+    },
+    canvasWheel: {
+      handleWheel
     }
   };
 };
