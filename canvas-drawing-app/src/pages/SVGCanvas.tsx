@@ -10,6 +10,7 @@ export default function SVGCanvas() {
   const { left, top } = canvasStateVars.position;
   const { handleWheel } = canvasStateVars.canvasWheel;
   const { isMovingCanvas } = canvasStateVars.movingCanvas;
+  const { isWritingText } = canvasStateVars.text;
 
   return (
     <CanvasContext.Provider value={canvasStateVars}>
@@ -17,9 +18,11 @@ export default function SVGCanvas() {
       >
         <div
         onWheelCapture={handleWheel}
+        className="h-[100%] w-[100%]"
         >
           <div style={{position: "relative", transform: `translate(${left}px, ${top}px)`}}>
             <DrawingCanvas/>
+            {isWritingText ? <textarea className={`absolute left-[0px] top-[0px] z-10`} defaultValue={"Lessgoooo"}></textarea> : <></> }
           </div>
         </div>
         <div>

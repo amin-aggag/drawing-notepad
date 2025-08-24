@@ -25,5 +25,11 @@ export type CanvasContextTypes = {
   },
   canvasWheel: {
     handleWheel
+  },
+  text: {
+    text,
+    setText,
+    isWritingText,
+    setIsWritingText,
   }
 }

@@ -2,6 +2,7 @@ import { useRef } from "react";
 import usePen from "../../hooks/usePen";
 import { useCanvasContext } from "../../hooks/useCanvasContext";
 import { CanvasContextTypes } from "../../types/CanvasContextTypes";
+import Button from "./Button";
 
 const colorArray = [ "black", "orange", "mediumseagreen", "tomato", "violet", "dodgerblue", "slateblue", "lightgray" ];
 
@@ -13,6 +14,7 @@ export default function UI() {
   const { states, index } = canvasStateVars.canvasStates;
   const { color, setColor, penSize, setPenSize } = canvasStateVars.penSize;
   const { undo, redo } = canvasStateVars.canvasStates;
+  const { text, setText, isWritingText, setIsWritingText} = canvasStateVars.text;
   
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -21,8 +23,8 @@ export default function UI() {
       <div style={{position: "absolute",top: "0", left: "0px", fontSize: "50px", zIndex: "1", display: "flex", flexDirection: "row", background: "aliceblue", width: "100%", minHeight: "100px", marginBlock: "auto", alignItems: "center", padding: "17px", borderBottomRightRadius: "10px", borderBottomLeftRadius: "10px", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", flexWrap: "wrap", justifyContent: "space-around"}}>
         <div>
           {(states.length === 1 || index <= 0) ?
-            <button style={{ fontSize: "50px", zIndex: "1", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", marginRight: "15px", paddingTop: "0"}} onClick={undo} disabled>Undo</button> :
-            <button style={{fontSize: "50px", zIndex: "2", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", marginRight: "15px", paddingTop: "0"}} onClick={undo}>Undo</button>
+            <Button handleOnClick={undo} label={"Undo"} isDisabled={"true"}/> :
+            <Button handleOnClick={undo} label={"Undo"} isDisabled={"false"}/>
           }
           {((states.length === 1 && index <= 0) || index === (states.length - 1)) ? 
             <button style={{fontSize: "50px", zIndex: "1", background: "aliceblue", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", padding: "5px", minWidth: "100px", height: "75px", paddingTop: "0"}} disabled>Redo</button> :
@@ -44,6 +46,10 @@ export default function UI() {
               <button style={{height: "40px", width: "40px", background: color, cursor: "pointer", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", marginRight: "10px"}} key={index} onClick={() => setColor(color) }></button>
             ))}
           </div>
+        </div>
+        <div className="flex-wrap w-[100px]">
+          <button style={{height: "50px", width: "70px", background: (isWritingText ? "#cce7ff" : "aliceblue"), cursor: "pointer", fontSize: "30px", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", marginRight: "10px"}}  key={index} onClick={() => setIsWritingText((prev) => !prev)}>Text</button>
+          <button style={{height: "50px", width: "130px", background: "aliceblue", cursor: "pointer", fontSize: "30px", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", marginRight: "10px"}} key={index} onClick={() => setIsWritingText((prev) => !prev)}>Selection</button>
         </div>
       </div>
     </>

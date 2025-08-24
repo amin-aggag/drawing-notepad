@@ -11,8 +11,11 @@ export default function DrawingCanvas() {
   const { color } = canvasStateVars.penSize;
   const { isMovingCanvas } = canvasStateVars.movingCanvas;
   const { handleWheel } = canvasStateVars.canvasWheel;
+  const { text, setText, isWritingText, setIsWritingText} = canvasStateVars.text;
+  const { left, top } = canvasStateVars.position;
 
   return (
+    <>
       <svg
         onPointerDown={isMovingCanvas ? () => {} : handlePointerDown}
         onPointerMove={isMovingCanvas ? () => {} : handlePointerMove}
@@ -23,7 +26,8 @@ export default function DrawingCanvas() {
         style={{ touchAction: "none", position: "relative", top: "0", left: "0", height: `${height}px`, width: `${width}px`, zIndex: "1", backgroundColor: "#ffffff", fill: color }}
       >
         {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD.path} key={index} fill={pD.color} style={{zIndex: 100}}/>))}
-        {isDrawing && <path d={pathData} style={{zIndex: 100}}/>}
+        {isDrawing && <path d={pathData} style={{zIndex: 100}} />}
       </svg>
+    </>
   )
 }

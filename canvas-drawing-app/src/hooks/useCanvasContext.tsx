@@ -10,6 +10,7 @@ import getStroke from "perfect-freehand";
 import useIsMovingCanvas from "./useIsMovingCanvas";
 import { CanvasContextTypes } from "../types/CanvasContextTypes";
 import useCanvasWheel from "./useCanvasWheel";
+import useText from "./useText";
 
 export type svgPathType = {path: string, color: string}
 
@@ -51,6 +52,7 @@ export const useCanvasStateVars = () => {
   const { color, setColor, penSize, setPenSize } = usePen();
   const { isMovingCanvas, setIsMovingCanvas } = useIsMovingCanvas();
   const { handleWheelGeneral } = useCanvasWheel();
+  const { text, setText, isWritingText, setIsWritingText } = useText();
 
   // --- Handlers ---
   const { handleTouchStartGeneral, handleTouchMoveGeneral, handleTouchEndGeneral } = useHandleTouch();
@@ -143,6 +145,12 @@ export const useCanvasStateVars = () => {
     },
     canvasWheel: {
       handleWheel
+    },
+    text: {
+      text,
+      setText,
+      isWritingText,
+      setIsWritingText
     }
   };
 };
