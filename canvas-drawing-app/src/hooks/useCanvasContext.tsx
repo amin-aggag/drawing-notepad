@@ -107,11 +107,14 @@ export const useCanvasStateVars = () => {
   }
 
   function handleWheel(e) {
-    handleWheelGeneral(e, setLeft, setTop);
+    handleWheelGeneral(e, left, setLeft, top, setTop);
   }
 
   const stroke = getStroke(points, options);
   const pathData = (getSvgPathFromStroke(stroke));
+
+  console.log("left=", left);
+  console.log("top=", top);
   
   return {
     canvasStates: {

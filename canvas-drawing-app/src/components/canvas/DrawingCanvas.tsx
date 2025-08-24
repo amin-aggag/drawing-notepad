@@ -10,6 +10,7 @@ export default function DrawingCanvas() {
   const { allPathData, pathData, isDrawing } = canvasStateVars.canvasStates;
   const { color } = canvasStateVars.penSize;
   const { isMovingCanvas } = canvasStateVars.movingCanvas;
+  const { handleWheel } = canvasStateVars.canvasWheel;
 
   return (
       <svg

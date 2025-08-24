@@ -45,6 +45,9 @@ export default function UI() {
             ))}
           </div>
         </div>
+        <div>
+          <button style={{height: "50px", width: "70px", background: "aliceblue", cursor: "pointer", fontSize: "30px", borderRadius: "10px", borderColor: "lightgray", borderStyle: "hidden", boxShadow: "1px 1px 4px 1px lightgray", marginRight: "10px"}} key={index} onClick={()=>{}}>Text</button>
+        </div>
       </div>
     </>
   )

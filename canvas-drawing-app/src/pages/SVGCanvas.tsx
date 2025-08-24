@@ -13,10 +13,10 @@ export default function SVGCanvas() {
 
   return (
     <CanvasContext.Provider value={canvasStateVars}>
-      <div style={{overflow: "scroll", overscrollBehavior: "none", scrollbarWidth: "none"}}
+      <div style={{overflow: "hidden", overscrollBehavior: "none", scrollbarWidth: "none"}}
       >
         <div
-          onWheelCapture={isMovingCanvas ? () => {} : handleWheel}
+        onWheelCapture={handleWheel}
         >
           <div style={{position: "relative", transform: `translate(${left}px, ${top}px)`}}>
             <DrawingCanvas/>

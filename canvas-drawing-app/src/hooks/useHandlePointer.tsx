@@ -1,6 +1,10 @@
 export default function useHandlePointer() {
   function handlePointerDownGeneral(e, setPoints, left, top, setIsDrawing) {
     e.target.setPointerCapture(e.pointerId);
+    // console.log("e.pageX - left", e.pageX - left);
+    // console.log("e.pageY - top", e.pageY - top);
+    // console.log("e.pageX", e.pageX)
+    // console.log("e.pageY", e.pageY)
     setPoints([[e.pageX - left, e.pageY - top, e.pressure]]);
     setIsDrawing(true);
   }
