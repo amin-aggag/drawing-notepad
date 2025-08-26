@@ -30,15 +30,9 @@ None of this code came from any course or YouTube tutorial. This project was mad
 
 🖼️ Sleek and undistracting UI design
 
-## Planned features
+## Planned code refactors
 
-📁 File system of notes/drawings
-
-💾 Saving notes and importing/exporting 
-
-📄 Custom canvas size
-
-↗️ Zooming canvas in and out
+🎨 Use TailwindCSS for styling and reusable components to avoid messy inline CSS styling
 
 ## Running the app locally
 
