@@ -34,6 +34,8 @@ None of this code came from any course or YouTube tutorial. This project was mad
 
 🎨 Use TailwindCSS for styling and reusable components to avoid messy inline CSS styling
 
+📦 Use Redux.js for state management instead of just useContext() since Redux seems perfect for my use case (the app requires centralised state management as several components need access to the same state elements)
+
 ## Running the app locally
 
 Clone this repository: `git clone <repository-link>`
