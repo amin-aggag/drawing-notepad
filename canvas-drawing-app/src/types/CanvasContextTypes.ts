@@ -1,4 +1,4 @@
-import { PointerEventHandler, TouchEventHandler } from "react";
+import { PointerEventHandler, TouchEventHandler, WheelEventHandler } from "react";
 
 export type svgPathType = {
   path: string,
@@ -76,7 +76,7 @@ type movingCanvas = {
 }
 
 type canvasWheel = {
-  handleWheel: (e: WheelEvent) => void
+  handleWheel: WheelEventHandler<HTMLDivElement>
 }
 
 export type CanvasContextTypes = {
