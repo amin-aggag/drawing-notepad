@@ -11,10 +11,6 @@ import useIsMovingCanvas from "./useIsMovingCanvas";
 import { CanvasContextTypes } from "../types/CanvasContextTypes";
 import useCanvasWheel from "./useCanvasWheel";
 
-export type svgPathType = {path: string, color: string}
-
-export type pointType = (number[] | { x: number; y: number; pressure?: number | undefined; })[]
-
 const getSvgPathFromStroke = (stroke) => {
   if (!stroke.length) return ""
 
@@ -112,13 +108,13 @@ export const useCanvasStateVars = () => {
 
   const stroke = getStroke(points, options);
   const pathData = (getSvgPathFromStroke(stroke));
-
-  console.log("left=", left);
-  console.log("top=", top);
   
   return {
     canvasStates: {
-      points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, pathData, setPathData, isDrawing, setIsDrawing, undo, redo
+      points, setPoints, states, setStates,
+      index, setIndex, allPathData, setAllPathData,
+      pathData, setPathData, isDrawing, setIsDrawing,
+      undo, redo
     },
     position: {
       left, setLeft, top, setTop
