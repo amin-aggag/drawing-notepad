@@ -1,10 +1,6 @@
 export default function useHandlePointer() {
   function handlePointerDownGeneral(e, setPoints, left, top, setIsDrawing) {
     e.target.setPointerCapture(e.pointerId);
-    // console.log("e.pageX - left", e.pageX - left);
-    // console.log("e.pageY - top", e.pageY - top);
-    // console.log("e.pageX", e.pageX)
-    // console.log("e.pageY", e.pageY)
     setPoints([[e.pageX - left, e.pageY - top, e.pressure]]);
     setIsDrawing(true);
   }
@@ -22,7 +18,6 @@ export default function useHandlePointer() {
       setAllPathData([...allPathData, {path: pathData, color: color}]);
       let temporaryState = states.slice(0, index + 1);
       setStates([...temporaryState, [...allPathData, {path: pathData, color: color}]]);
-      // console.log("states: ", [...temporaryState, [...allPathData, {path: pathData, color: color}]]);
       setIsDrawing(false);
       setIndex(index + 1);
     }

@@ -1,3 +1,5 @@
+import { PointerEventHandler, TouchEventHandler } from "react";
+
 export type svgPathType = {
   path: string,
   color: string
@@ -57,15 +59,15 @@ type penSize = {
 }
 
 type handleTouch = {
-  handleTouchStart: (e: TouchEvent) => void,
-  handleTouchMove: (e: TouchEvent) => void,
-  handleTouchEnd: (e: TouchEvent) => void
+  handleTouchStart: TouchEventHandler<SVGSVGElement>,
+  handleTouchMove: TouchEventHandler<SVGSVGElement>,
+  handleTouchEnd: TouchEventHandler<SVGSVGElement>
 }
   
 type handlePointer = {
-  handlePointerDown: (e: PointerEvent) => void,
-  handlePointerMove: (e: PointerEvent) => void,
-  handlePointerUp: (e: PointerEvent) => void
+  handlePointerDown: PointerEventHandler<SVGSVGElement>,
+  handlePointerMove: PointerEventHandler<SVGSVGElement>,
+  handlePointerUp: PointerEventHandler<SVGSVGElement>
 }
 
 type movingCanvas = {
