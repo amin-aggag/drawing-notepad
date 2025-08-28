@@ -40,7 +40,7 @@ None of this code came from any course or YouTube tutorial. This project was mad
 
 Clone this repository: `git clone <repository-link>`
 
-Run `cd canvas-drawing-app; npm i`
+Run `cd drawing-notepad/canvas-drawing-app; npm i`
 
 Run `npm run dev`
 
