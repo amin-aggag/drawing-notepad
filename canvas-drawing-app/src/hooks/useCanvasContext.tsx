@@ -40,7 +40,12 @@ export const useCanvasContext: () => CanvasContextTypes = () => {
 export const useCanvasStateVars = () => {
 
   // --- State variables ---
-  const { points, setPoints, states, setStates, index, setIndex, allPathData, setAllPathData, setPathData, isDrawing, setIsDrawing, undo, redo } = useCanvasStates();
+  const { 
+    points, setPoints, states, setStates,
+    index, setIndex, allPathData, setAllPathData,
+    setPathData, isDrawing, setIsDrawing, undo,
+    redo
+  } = useCanvasStates();
   const { left, setLeft, top, setTop } = usePosition();
   const { touchX, setTouchX, touchY, setTouchY } = useTouch();
   const { width, setWidth, height, setHeight } = useCanvasProperties();
@@ -51,12 +56,6 @@ export const useCanvasStateVars = () => {
   // --- Handlers ---
   const { handleTouchStartGeneral, handleTouchMoveGeneral, handleTouchEndGeneral } = useHandleTouch();
   const { handlePointerDownGeneral, handlePointerMoveGeneral, handlePointerUpGeneral } = useHandlePointer();
-
-  // --- Error handling ---
-  const canvasContext = useContext(CanvasContext);
-  // if (canvasContext === undefined) {
-  //   throw new Error("useCanvasContext must be used with a CanvasContext.Provider");
-  // }
 
   const options = {
     size: penSize,

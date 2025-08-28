@@ -21,9 +21,15 @@ export default function DrawingCanvas() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         
-        style={{ touchAction: "none", position: "relative", top: "0", left: "0", height: `${height}px`, width: `${width}px`, zIndex: "1", backgroundColor: "#ffffff", fill: color }}
+        style={{
+          touchAction: "none", position: "relative", top: "0", left: "0",
+          height: `${height}px`, width: `${width}px`, zIndex: "1", backgroundColor: "#ffffff",
+          fill: color
+        }}
       >
-        {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(<path d={pD.path} key={index} fill={pD.color} style={{zIndex: 100}}/>))}
+        {allPathData === undefined ? <></> : allPathData.map((pD, index)=>(
+          <path d={pD.path} key={index} fill={pD.color} style={{zIndex: 100}}/>
+        ))}
         {isDrawing && <path d={pathData} style={{zIndex: 100}}/>}
       </svg>
   )
