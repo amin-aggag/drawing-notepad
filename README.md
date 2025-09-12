@@ -2,6 +2,8 @@
 
 A drawing app that supports stylus, mouse and touch input. With a sleek and minimal design that is responsive on desktop and mobile, it works anywhere as the sketchpad of your next big idea.
 
+There is a continuation of this project into a full-fledged note-taking app for both handwriting and typing, complete with an Obsidian-like graph view to view connections between notes. It's at this link: [https://github.com/amin-aggag/ilmmind-web/](https://github.com/amin-aggag/ilmmind)
+
 ![Drawing Notepad preview - A house on a hill with two hills with trees behind it](/canvas-drawing-app/src/assets/Drawing%20Notepad%20Preview%20Image.png)
 
 ## Technologies used
