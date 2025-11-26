@@ -50,5 +50,5 @@ The app should now be working on [http://localhost:5173](http://localhost:5173)!
 
 ## Known bugs
 
-When moving the canvas with two fingers, dots from the touch input are registered as actual drawings. This will be fixed soon. For now, they can be undone and drawing can continue as usual.
+When moving the canvas with two fingers, dots from the touch input are registered as actual drawings. This will be fixed in a later project which is linked at the top of this README. For now, they can be undone and drawing can continue as usual.
 
